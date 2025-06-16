@@ -1,0 +1,26 @@
+const db = require('../db');
+
+exports.getAllCases = (req, res) => {
+  const sql = 'SELECT * FROM covid_cases LIMIT 100';
+  db.query(sql, (err, results) => {
+    if (err) return res.status(500).json({ status: 'error', message: err.message });
+    res.json({ status: 'success', data: results });
+  });
+};
+
+exports.getCaseByHospital = (req, res) => {
+  const hos_id = req.params.hos_id;
+  const sql = 'SELECT * FROM covid_cases WHERE hos_id = ?';
+  db.query(sql, [hos_id], (err, results) => {
+    if (err) return res.status(500).json({ status: 'error', message: err.message });
+    res.json({ status: 'success', data: results });
+  });
+};
+
+exports.totalgender = (req, res) => {
+  const sql = 'SELECT sex, COUNT(*) AS total FROM covid_cases GROUP BY sex';
+  db.query(sql, (err, results) => {
+    if (err) return res.status(500).json({ status: 'error', message: err.message });
+    res.json({ status: 'success', data: results });
+  });
+};
