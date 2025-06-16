@@ -15,8 +15,6 @@ exports.getAllCases = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
-
 exports.getCaseByHospital = (req, res) => {
   const hos_id = req.params.hos_id;
   const sql = 'SELECT * FROM covid_cases WHERE hos_id = ?';
@@ -25,7 +23,6 @@ exports.getCaseByHospital = (req, res) => {
     res.json({ status: 'success', data: results });
   });
 };
-
 exports.totalgender = (req, res) => {
   const sql = 'SELECT sex, COUNT(*) AS total FROM covid_cases GROUP BY sex';
   db.query(sql, (err, results) => {
