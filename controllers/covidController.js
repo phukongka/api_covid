@@ -1,12 +1,21 @@
 const db = require('../db');
 
-exports.getAllCases = (req, res) => {
-  const sql = 'SELECT * FROM covid_cases LIMIT 100';
-  db.query(sql, (err, results) => {
-    if (err) return res.status(500).json({ status: 'error', message: err.message });
-    res.json({ status: 'success', data: results });
-  });
+// exports.getAllCases = (req, res) => {
+//   const sql = 'SELECT * FROM covid_cases LIMIT 100';
+//   db.query(sql, (err, results) => {
+//     if (err) return res.status(500).json({ status: 'error', message: err.message });
+//     res.json({ status: 'success', data: results });
+//   });
+// };
+exports.getAllCases = async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM covid_cases");
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
+
 
 exports.getCaseByHospital = (req, res) => {
   const hos_id = req.params.hos_id;
