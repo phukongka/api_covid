@@ -14,7 +14,7 @@ app.use(express.json());
 app.use('/api/covid', covidRoutes);
 
 // เริ่มต้นเซิร์ฟเวอร์
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
