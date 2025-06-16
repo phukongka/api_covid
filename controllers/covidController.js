@@ -10,7 +10,7 @@ const db = require('../db');
 exports.getAllCases = async (req, res) => {
   try {
     const [rows] = await db.query("SELECT * FROM covid_cases");
-    res.json(rows);
+    // res.json(rows);
     res.send({
       rows: rows[0]
     })
