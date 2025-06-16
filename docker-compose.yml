@@ -23,6 +23,7 @@ services:
       MYSQL_PASSWORD: covid_password
     volumes:
       - db_data:/var/lib/mysql
+      - ./covid_cases_final.sql:/docker-entrypoint-initdb.d/covid_cases_final.sql # Mount ไฟล์ SQL โดยตรง
     restart: always
 
   phpmyadmin:
